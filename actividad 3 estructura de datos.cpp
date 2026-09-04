@@ -53,20 +53,26 @@ class Alumnos{
         cout<<"Ingrese las calificaciones de matematicas, fisica y quimica, estas deben tener un rango de 60 a 100:"<<endl; 
          
         cin >> mate; 
-        while(mate < 60 || mate > 100){ 
+        while((mate < 60 || mate > 100) || (cin.fail())){ 
             cout<<"Ingrese una calificacion valida (60-100): "<<endl; 
+            cin.clear(); 
+            cin.ignore(1000, '\n'); 
             cin >> mate; 
         }  
  
         cin >> fisica; 
-        while(fisica < 60 || fisica > 100){ 
+        while((fisica < 60 || fisica > 100) || (cin.fail())){ 
             cout<<"Ingrese una calificacion valida (60-100): "<<endl; 
+            cin.clear(); 
+            cin.ignore(1000, '\n'); 
             cin >> fisica; 
         } 
  
         cin >> quimica; 
-        while(quimica < 60 || quimica > 100){ 
+        while((quimica < 60 || quimica > 100) || (cin.fail())){ 
             cout<<"Ingrese una calificacion valida (60-100): "<<endl; 
+            cin.clear(); 
+            cin.ignore(1000, '\n'); 
             cin >> quimica; 
         } 
         resultado = (mate + fisica + quimica) / 3; 
@@ -88,6 +94,8 @@ class Alumnos{
  
             do{     
             cin >> opcion;
+            cin.clear();
+            cin.ignore(1000, '\n');
             switch(opcion){ 
                 case 'a': 
                 mostrar_info_alumno(alumno1, alumno2); 
@@ -100,7 +108,7 @@ class Alumnos{
  
             } 
              
-        }while(opcion != 'a' && opcion != 'b'); 
+        }while((opcion != 'a' && opcion != 'b') || (cin.fail()));  
  
     } 
  
