@@ -58,6 +58,14 @@ public:
         Fin.next = NULL;
     }
 
+    ~Lista(){ //destructor
+        Nodo* temporal = Inicio.next;
+        while (temporal != &Fin){
+            Inicio.Eliminar_adelante(Inicio.next);
+            temporal = Inicio.next;
+        }
+    }
+
     void InsertarPrincipio(float valor){
         Inicio.insertarAdelante(valor, &Inicio);
     }
@@ -70,6 +78,17 @@ public:
             temporal = temporal->next;
         }
         cout << endl;
+        
+    }
+
+    void Tamaño_lista(){
+        int nodos = 0;
+        Nodo* temporal = Inicio.next;
+        while(temporal != &Fin){
+            nodos ++;
+            temporal = temporal->next;
+        }
+        cout << "Lista con tamaño de " << nodos << " nodos" << endl;
     }
 
     void Insertar_al_final(float valor){
@@ -106,25 +125,15 @@ int main(){
     lista.InsertarPrincipio(8.4);
     lista.InsertarPrincipio(10.1);
     lista.Imprimir();
+    lista.Tamaño_lista();
 
     lista.Insertar_al_final(2.2);
     lista.Imprimir(); 
+    lista.Tamaño_lista();
 
-    lista.Eliminar_final();
+ 
+    lista.~Lista(); //llamar al destructor
     lista.Imprimir();
-    
-    lista.Eliminar_principio();
-    lista.Imprimir();
-
-    lista.Eliminar_principio();
-    lista.Imprimir();
-
-    lista.Eliminar_principio();
-    lista.Imprimir();
-
-    lista.Eliminar_principio();
-    lista.Imprimir();
-
 
 return 0;
 }
