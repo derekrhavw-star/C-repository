@@ -196,20 +196,23 @@ class Alumnos : public Nodo{
         cout << "tamaño de cadena: " << tamaño << endl;
     }
 
-    void Imprimir_lista_calificacionesInd(int& valor){ //posiblemente se impriman valores basura al manejar solo variables locales
+    void Imprimir_lista(int& valor, string& valor_string){ //posiblemente se impriman valores basura al manejar solo variables locales
         Nodo* actual = cabezera;
+        Nodo* actual_string = cabezera;
 
         cout << "La lista de elementos es: " << endl;
 
         while (actual != NULL){
             cout << actual->valor << "";
+            cout<< actual_string->valor_string << "";
             actual = actual->next;
-            cout << endl;
+            actual_string = actual_string->next;
+            cout << endl; //imprime toda la lista 
         }
 
         //cout << "\t" << endl;
         //todo es una sola linea...
-        //¿Por que imprime 0 extras?(!!)
+        //¿Por que imprime 0 extras? error pendiente(!!)
     }
 
     void menu(){
@@ -224,7 +227,7 @@ class Alumnos : public Nodo{
                 mostrar_info_alumno();
                 break;
                 case 'b':
-                Imprimir_lista_calificacionesInd(valor); //funciona pero imprime todas de las calificaciones, sin formato alguno ni los promedios, ademas de que hay un 0 de mas en cada cola de la lista. (!!)
+                Imprimir_lista(valor, valor_string); //funciona pero imprime todas de las calificaciones, sin formato alguno ni los promedios, ademas de que hay un 0 de mas en cada cola de la lista. (!!)
                 break;
                 case 'c':
                 cout<<"saliendo del programa..."<<endl;
