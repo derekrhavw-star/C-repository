@@ -54,6 +54,16 @@ public:
 
     }
 
+    void destruir_lista(){
+        Nodo*temp = cabezera;
+        while (cabezera != NULL){
+            temp = cabezera->next;
+            delete cabezera;
+            cabezera = temp;
+        }
+        cout<<"Lista vacia"<<endl;
+    }
+
     void Agregar_string(string valor_string){
         Nodo* temp;
         temp = new Nodo(); //agregar e inicializar cadena de datos de calificacion
@@ -127,6 +137,10 @@ class Alumnos : public Nodo{
 
     Alumnos(){}; //constructor por defecto. Es importante para poder crear objetos sin parametros previos.
 
+    
+
+
+
     Alumnos(string n, int m, int f, int q){
         nombre = n;
         mate = m;
@@ -184,7 +198,10 @@ class Alumnos : public Nodo{
     
     }
 
-    void Tamaño(){
+    void Tamaño(){ //cada que un alumno complete su campo de datos tamaño debe aumentar en 1 (!!)
+                    //No le voy a pedir a una maquina hacer mi trabajo... (!!)
+                    //no quiero trabajar con cada nodo y cambiar el sistema de nodos involucra rehacer el codigo... quiero que cada que se registre una funcion de 3 o 4 promedios dependiendo la clase, el contador aumente en 1.
+                    //quiza se deban leer los nodos, pero lo que yo quiero hacer es un if else que cada que la funcion promedio sea completada el contador aumente en 1.
         int tamaño = 0;
 
         Nodo* actual = cabezera;
@@ -193,21 +210,22 @@ class Alumnos : public Nodo{
             tamaño++;
             actual = actual->next;
         }
-        cout << "tamaño de cadena: " << tamaño << endl;
+        cout << "tamaño de cadena: " << tamaño / 4 << endl; //solucion temporal... los alumnos registran siempre 4 datos, entonces al dividir, se obtiene el numero de nodos de cada alumno
     }
 
-    void Imprimir_lista(int& valor, string& valor_string){ //posiblemente se impriman valores basura al manejar solo variables locales
+    void Imprimir_lista(int& valor, string& valor_string){ 
         Nodo* actual = cabezera;
         Nodo* actual_string = cabezera;
 
         cout << "La lista de elementos es: " << endl;
 
         while (actual != NULL){
-            cout << actual->valor << "";
-            cout<< actual_string->valor_string << "";
+            cout << actual->valor << ""; //imprime calificaciones
+            cout<< actual_string->valor_string << ""; //imprime nombres
             actual = actual->next;
             actual_string = actual_string->next;
-            cout << endl; //imprime toda la lista 
+            cout << endl; //salto de linea para cada dato
+             
         }
 
         //cout << "\t" << endl;
@@ -217,19 +235,28 @@ class Alumnos : public Nodo{
 
     void menu(){
         char opcion;
-        cout << "bienvenido, seleccione la opcon a desear: a) Mostrar informacion del ultimo alumno \tb) Imprimir lista  \tc) Salir "<<endl;
-        cin >> opcion;
+        cout<<"Bienvenido";
 
             do{
-            switch(opcion){
+                cout << "seleccione la opcon a desear: a) Mostrar informacion del ultimo alumno \nb) Imprimir lista  \nc)añadir alumno \nd) Destruir lista \ne) Salir "<<endl;
+                cin >> opcion;
+                switch(opcion){
 
                 case 'a':
                 mostrar_info_alumno();
                 break;
                 case 'b':
                 Imprimir_lista(valor, valor_string); //funciona pero imprime todas de las calificaciones, sin formato alguno ni los promedios, ademas de que hay un 0 de mas en cada cola de la lista. (!!)
+                Tamaño();
                 break;
                 case 'c':
+                Obtener_Nombre();
+                obtener_promedio();
+                break;
+                case 'd':
+                destruir_lista();
+                break;
+                case 'e':
                 cout<<"saliendo del programa..."<<endl;
                 break;
                 default:
@@ -237,7 +264,7 @@ class Alumnos : public Nodo{
 
             }
             
-        } while(opcion != 'a' && opcion != 'b');
+        } while(opcion != 'e');
 
     }
 
@@ -251,19 +278,10 @@ alumno1.Obtener_Nombre(); //llamo a la funcion para obtener el nombre del alumno
 
 alumno1.obtener_promedio(); //llamo a la funcion para obtener el promedio del alumno
 
-alumno1.Obtener_Nombre(); 
-
-alumno1.obtener_promedio();
-
-
-
 alumno1.menu(); 
-
-
 
 
     return 0;
 }
 
-
-//Agregar funciones: Tamaño de la lista, Destruir la lista, Agregar alumnos a la lista de forma indefinida.
+//arreglar todo el desvergue que hice con los nodos.
